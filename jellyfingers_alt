@@ -1,0 +1,24 @@
+#!/bin/sh
+JELLY_STRING=""
+OPTION="1"
+RESULT=""
+
+JELLY_LIST=""
+
+while [ $OPTION != "3" ]
+do
+    if [ $OPTION -eq "1" ]
+    then
+        RESULT=$(./jellyfinger "$JELLY_STRING")
+        JELLY_STRING="$JELLY_STRING$RESULT"
+        JELLY_LIST="$JELLY_LISTÜ$RESULT"
+    fi
+    if [ $OPTION -eq "2" ]
+    then
+        NEXT_DELETE=$(echo "$JELLY_LIST" | sed -E -e "s/.*Ü(.*)/\1/g")
+        JELLY_LIST=$(echo "$JELLY_LIST" | sed -E -e "s/(.*)Ü.*/\1/g")
+        JELLY_STRING=$(echo "$JELLY_STRING" | sed -E -e "s/${NEXT_DELETE}$//g")
+    fi
+    OPTION=$(dmenu -i -l 40 -fn Monospace-18 -p "$JELLY_STRING" < options | sed -E -e "s/^(.).*/\1/g")
+done
+echo "$JELLY_STRING"

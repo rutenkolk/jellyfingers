@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ $# -eq 0 ]
+then
+    dmenu -i -l 40 -fn Monospace-18 < altdict | sed -E -e 's/^(.*)    .*/\1/g'
+else
+    dmenu -i -l 40 -fn Monospace-18 -p "$1" < altdict | sed -E -e 's/^(.*)    .*/\1/g'
+fi

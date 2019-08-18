@@ -1,0 +1,25 @@
+#!/bin/sh
+JELLY_STRING=""
+RESULT=""
+LAST_RESULT=""
+
+JELLY_LIST=""
+
+while [ "$LAST_RESULT" != "QUIT" ]
+do
+    RESULT=$(./jellyfinger_with_options "$JELLY_STRING")
+    if [ "$RESULT" = "BACK" ]
+    then
+        NEXT_DELETE=$(echo "$JELLY_LIST" | sed -E -e "s/.*Ü(.*)/\1/g")
+        JELLY_LIST=$(echo "$JELLY_LIST" | sed -E -e "s/(.*)Ü.*/\1/g")
+        JELLY_STRING=$(echo "$JELLY_STRING" | sed -E -e "s/${NEXT_DELETE}$//g")
+    elif [ "$RESULT" = "QUIT" ]
+    then
+        true
+    else
+        JELLY_STRING="$JELLY_STRING$RESULT"
+        JELLY_LIST="$JELLY_LISTÜ$RESULT"
+    fi
+    LAST_RESULT="$RESULT"
+done
+echo "$JELLY_STRING"
