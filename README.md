@@ -30,6 +30,8 @@ These little scripts should work on all \*nix systems that have dmenu and git on
 
 `jellyfingers` querys you to type in a description of the symbol(s) you want to use. Since this is just dmenu you can also simply use the arrow keys in the list of options.
 
+Your current Jelly string is being displayed as the dmenu prompt. This string is usually located in the top left corner (unless you customized your dmenu).
+
 Press `Enter` to select the entry you want.
 If you want to delete the last symbol(s) you entered, search for the entry labeled `BACK`.
 If you are done, select the entry labeled `QUIT`. `jellyfingers` will output your string to stdout.
