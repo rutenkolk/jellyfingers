@@ -23,3 +23,4 @@ do
     LAST_RESULT="$RESULT"
 done
 echo "$JELLY_STRING"
+jelly eun $JELLY_STRING
